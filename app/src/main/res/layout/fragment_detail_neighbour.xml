@@ -11,7 +11,7 @@
         android:id="@+id/ivAvatar"
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="0dp"
         android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="25dp"
         android:text="TextView"
         android:textAlignment="gravity"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -36,7 +36,7 @@
         android:layout_toLeftOf="@id/ivAvatar"
         android:layout_toEndOf="@id/ivAvatar"
         android:layout_alignBaseline="@id/ivAvatar"
-        android:textSize="40dp"
+        android:textSize="30dp"
         />
 
 </android.support.constraint.ConstraintLayout>
