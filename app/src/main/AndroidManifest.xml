@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.neighbour_list.DetailNeighbourActivity"
-            android:label="@string/title_activity_detail_neighbour"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ui.neighbour_list.ListNeighbourActivity"

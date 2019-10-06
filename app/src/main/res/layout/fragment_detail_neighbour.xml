@@ -9,19 +9,32 @@
 
     <ImageView
         android:id="@+id/ivAvatar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="3dp"
+        app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars[0]" />
 
     <TextView
         android:id="@+id/tvName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="40dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="180dp" />
+        android:textAlignment="gravity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@id/ivAvatar"
+        app:layout_constraintStart_toStartOf="@id/ivAvatar"
+        app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+        android:layout_toLeftOf="@id/ivAvatar"
+        android:layout_toEndOf="@id/ivAvatar"
+        android:layout_alignBaseline="@id/ivAvatar"
+        android:textSize="40dp"
+        />
 
 </android.support.constraint.ConstraintLayout>
