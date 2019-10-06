@@ -2,6 +2,7 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,8 +61,10 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 String mAvatar= neighbour.getAvatarUrl();
                 final Context context= holder.itemView.getContext();
                 Intent intent=new Intent(context,DetailNeighbourActivity.class);
-                intent.putExtra("name",mName);
-                intent.putExtra("avatar", mAvatar);
+                Bundle bundle  =new Bundle();
+                bundle.putString("name", mName);
+                bundle.putString("avatar", mAvatar);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
 
             }

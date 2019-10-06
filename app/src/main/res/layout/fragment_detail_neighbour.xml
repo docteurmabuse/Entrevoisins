@@ -4,15 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.neighbour_list.DetailNeighbourActivityFragment"
+    tools:context=".ui.neighbour_list.DetailNeighbourFragment"
     tools:showIn="@layout/activity_detail_neighbour">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivAvatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="3dp"
         tools:src="@tools:sample/avatars[0]" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="180dp" />
+
 </android.support.constraint.ConstraintLayout>
