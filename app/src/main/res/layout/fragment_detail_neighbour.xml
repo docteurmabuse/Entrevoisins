@@ -10,13 +10,15 @@
     <ImageView
         android:id="@+id/ivAvatar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_marginTop="3dp"
         android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars[0]" />
+        tools:src="@tools:sample/avatars[0]"
+        android:scaleType="centerCrop"
+        />
 
     <TextView
         android:id="@+id/tvName"
