@@ -4,4 +4,7 @@
     <string name="tab_favorites_title">Favorites</string>
     <string name="title_activity_detail_neighbour">DetailNeighbourActivity</string>
     <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

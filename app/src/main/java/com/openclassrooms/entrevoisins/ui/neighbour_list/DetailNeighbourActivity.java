@@ -1,12 +1,10 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +13,7 @@ import com.openclassrooms.entrevoisins.R;
 
 public class DetailNeighbourActivity extends AppCompatActivity {
    protected TextView tvName;
+    protected TextView tvName2;
    protected String mDetailName;
    protected ImageView ivAvatar;
    protected String mDetailAvatar;
@@ -29,9 +28,11 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tvName= findViewById(R.id.tvName);
+        tvName2= findViewById(R.id.mName2);
         mDetailName=getIntent().getStringExtra("name");
         mDetailAvatar=getIntent().getStringExtra("avatar");
         tvName.setText(mDetailName);
+        tvName2.setText(mDetailName);
         ivAvatar=findViewById(R.id.ivAvatar);
         Glide.with(ivAvatar.getContext())
                 .load(mDetailAvatar)
@@ -41,8 +42,6 @@ public class DetailNeighbourActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
     }
