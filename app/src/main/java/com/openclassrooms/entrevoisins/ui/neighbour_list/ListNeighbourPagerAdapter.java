@@ -27,7 +27,7 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
                 return NeighbourFragment.newInstance();
 
             case 1:
-                return DetailNeighbourFragment.newInstance();
+                return FavoriteNeighbourFragment.newInstance();
             default:
                 return null;
         }
