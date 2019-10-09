@@ -57,16 +57,17 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mName= neighbour.getName();
-                String mAvatar= neighbour.getAvatarUrl();
-                final Context context= holder.itemView.getContext();
-                Intent intent=new Intent(context,DetailNeighbourActivity.class);
-                Bundle bundle  =new Bundle();
+                String mName = neighbour.getName();
+                String mAvatar = neighbour.getAvatarUrl();
+                String mId = neighbour.getId().toString();
+                final Context context = holder.itemView.getContext();
+                Intent intent = new Intent(context, DetailNeighbourActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", mId);
                 bundle.putString("name", mName);
                 bundle.putString("avatar", mAvatar);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
-
             }
         });
 

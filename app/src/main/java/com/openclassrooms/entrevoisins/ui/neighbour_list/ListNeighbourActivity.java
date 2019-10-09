@@ -30,9 +30,26 @@ public class ListNeighbourActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_neighbour);
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
-        mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager());
+        final ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+
+        mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager(), mTabLayout.getTabCount());
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tabs) {
+                mViewPager.setCurrentItem(tabs.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tabs) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tabs) {
+            }
+        });
     }
 }
