@@ -42,7 +42,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        //add favorite button full if is favorite & empty if is not
         ImageView favoriteButton = findViewById(R.id.favoriteBtn);
         favoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +64,6 @@ public class DetailNeighbourActivity extends AppCompatActivity {
                 }
                 Snackbar.make(v, getIntent().getStringExtra("id"), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
             }
         });
 

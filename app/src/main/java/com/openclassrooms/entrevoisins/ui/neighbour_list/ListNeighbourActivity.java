@@ -35,19 +35,5 @@ public class ListNeighbourActivity extends AppCompatActivity {
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tabs) {
-                mViewPager.setCurrentItem(tabs.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tabs) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tabs) {
-            }
-        });
     }
 }
