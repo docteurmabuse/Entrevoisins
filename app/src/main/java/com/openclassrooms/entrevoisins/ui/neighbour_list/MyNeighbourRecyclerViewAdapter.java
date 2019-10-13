@@ -19,6 +19,8 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.List;
 
 import butterknife.BindView;
@@ -63,6 +65,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 final Context context = holder.itemView.getContext();
                 Intent intent = new Intent(context, DetailNeighbourActivity.class);
                 Bundle bundle = new Bundle();
+                //bundle.putSerializable("fav_neighbour",(Serializable)neighbour);
                 bundle.putString("id", mId);
                 bundle.putString("name", mName);
                 bundle.putString("avatar", mAvatar);
