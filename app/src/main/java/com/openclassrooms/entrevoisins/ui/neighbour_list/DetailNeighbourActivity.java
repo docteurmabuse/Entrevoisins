@@ -2,6 +2,7 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,17 +12,21 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.events.AddFavoriteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.FavoriteNeighbourApiService;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DetailNeighbourActivity extends AppCompatActivity {
     private boolean isFavorite=false;
-
     private FavoriteNeighbourApiService mFavApiService;
     private List<Neighbour> mFavNeighbours;
+    FloatingActionButton favoriteButton;
+    ImageView backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +47,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
                 .load(mDetailAvatar)
                 .into(ivAvatar);
         //add back button
-        ImageView backButton = findViewById(R.id.backbutton);
+        backButton = findViewById(R.id.backbutton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,21 +55,23 @@ public class DetailNeighbourActivity extends AppCompatActivity {
             }
         });
         //add favorite button full if is favorite & empty if is not
-        ImageView favoriteButton = findViewById(R.id.favoriteBtn);
+        favoriteButton = findViewById(R.id.favoriteBtn);
         favoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // mFavApiService.addFavoriteNeighbour(new Neighbour(Integer.valueOf(mId),mDetailName,mDetailAvatar));
-                mFavApiService.addFavoriteNeighbour(new Neighbour (12, "bbnnb", "http://i.pravatar.cc/150?u=a042581f3e39026702d"));
+                //mFavApiService.addFavoriteNeighbour(new Neighbour (12, "bbnnb", "http://i.pravatar.cc/150?u=a042581f3e39026702d"));
                 if (isFavorite!=true){
                     isFavorite=true;
                     favoriteButton.setImageResource(R.drawable.ic_star_yellow_24dp);
-
                 }
                 else {
                     isFavorite=false;
                     favoriteButton.setImageResource(R.drawable.ic_star_border_yellow_24dp);
                 }
+                Neighbour neighbour=new Neighbour (12, "Tibs", "http://i.pravatar.cc/150?u=a042581f3e39026702d");
+                EventBus.getDefault().post(new AddFavoriteNeighbourEvent(neighbour));
+
                 Snackbar.make(v, getIntent().getStringExtra("id"), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }

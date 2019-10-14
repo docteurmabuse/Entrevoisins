@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.AddFavoriteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.FavoriteNeighbourApiService;
@@ -19,6 +20,7 @@ import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -116,5 +118,17 @@ public class NeighbourFragment extends Fragment {
             initFavList();
         }
 
+    }
+
+    /**
+     * Fired if the user clicks on a add Favorite button
+     *
+     * @param event
+     */
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onAddFavoriteNeighbour(AddFavoriteNeighbourEvent event) {
+            mFavApiService.addFavoriteNeighbour(event.neighbour);
+            initFavList();
+            isFavorite=true;
     }
 }
