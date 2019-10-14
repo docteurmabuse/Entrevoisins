@@ -29,5 +29,5 @@ public class FavoriteNeighbourApiService implements  NeighbourApiService {
     }
 
     @Override
-    public  void addFavoriteNeighbour(Neighbour neighbour){neighbours.add(new Neighbour(12, "bbnnb", "http://i.pravatar.cc/150?u=a042581f3e39026702d"));}
+    public  void addFavoriteNeighbour(Neighbour neighbour){neighbours.add(neighbour);}
 }
