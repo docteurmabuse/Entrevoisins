@@ -20,6 +20,4 @@ public class DeleteNeighbourEvent {
         this.neighbour = neighbour;
     }
 
-
-
 }

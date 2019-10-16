@@ -40,8 +40,6 @@ public class ListNeighbourActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tabs) {
                 mViewPager.setCurrentItem(tabs.getPosition());
-                Snackbar.make(mViewPager, "est favorit ="+0, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
 
             @Override

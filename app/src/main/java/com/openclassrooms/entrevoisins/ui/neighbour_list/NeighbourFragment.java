@@ -28,12 +28,12 @@ import java.util.List;
 public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
-    static List<Neighbour> mNeighbours;
+    private List<Neighbour> mNeighbours;
     private FavoriteNeighbourApiService mFavApiService;
-    static List<Neighbour> mFavNeighbours;
-    static RecyclerView mRecyclerView;
+    private List<Neighbour> mFavNeighbours;
+    private RecyclerView mRecyclerView;
     private String IS_FAVORITE = "mFavori";
-    static   boolean isFavorite;
+    private   boolean isFavorite=false;
 
 
     /**
@@ -53,7 +53,7 @@ public class NeighbourFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isFavorite = getArguments().getBoolean("favorite");
+       // isFavorite = getArguments().getBoolean("favorite");
         mApiService = DI.getNeighbourApiService();
         mFavApiService = DI.getFavoriteService();
     }
@@ -66,7 +66,7 @@ public class NeighbourFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-            initList();
+        initList();
         return view;
     }
 
@@ -78,6 +78,10 @@ public class NeighbourFragment extends Fragment {
         mFavNeighbours = mFavApiService.getNeighbours();
         mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
         }
+
+    /**
+     * Init the List of favorite neighbours
+     */
 
         private void initFavList(){
             mNeighbours = mApiService.getNeighbours();
@@ -105,15 +109,10 @@ public class NeighbourFragment extends Fragment {
      */
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
-        if (isFavorite!=true){
+        if(!isFavorite) {
             mApiService.deleteNeighbour(event.neighbour);
             initList();
         }
-        else {
-            mFavApiService.deleteNeighbour(event.neighbour);
-            initFavList();
-        }
-
     }
 
 

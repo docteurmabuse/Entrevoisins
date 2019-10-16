@@ -35,7 +35,7 @@ public class FavoriteNeighboursFragment extends Fragment {
     private NeighbourApiService mFavApiService;
     private RecyclerView  mFavRecyclerView;
 
-    private String IS_FAVORITE = "mFavori";
+    private String IS_FAVORITE = "mFavorite";
     static   boolean isFavorite;
 
     /**
@@ -46,7 +46,7 @@ public class FavoriteNeighboursFragment extends Fragment {
     public static FavoriteNeighboursFragment newInstance(boolean isFavorite) {
         FavoriteNeighboursFragment fragment = new FavoriteNeighboursFragment();
         Bundle args = new Bundle();
-        args.putBoolean("favorite", isFavorite);
+        //args.putBoolean("favorite", isFavorite);
         fragment.setArguments(args);
         return fragment;
     }
@@ -99,7 +99,8 @@ public class FavoriteNeighboursFragment extends Fragment {
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onAddFavoriteNeighbour(AddFavoriteNeighbourEvent event) {
-        mFavApiService.addFavoriteNeighbour(event.neighbour);
         initList();
     }
+
+
 }
