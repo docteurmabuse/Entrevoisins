@@ -1,6 +1,9 @@
 package com.openclassrooms.entrevoisins.model;
 
 import java.util.Objects;
+import java.util.Random;
+
+import static com.openclassrooms.entrevoisins.service.FavouriteNeighbourGenerator.FAVOURITE_NEIGHBOURS;
 
 /**
  * Model object representing a Neighbour
@@ -15,6 +18,7 @@ public class Neighbour {
 
     /** Avatar */
     private String avatarUrl;
+    private  Neighbour favNeighbour;
 
     /**
      * Constructor
@@ -63,5 +67,11 @@ public class Neighbour {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+    /**
+     * Generate random user
+     */
+    public void  addFavoriteNeighbour(Neighbour favNeighbour){
+        FAVOURITE_NEIGHBOURS.add(favNeighbour);
     }
 }

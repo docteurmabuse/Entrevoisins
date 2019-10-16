@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.openclassrooms.entrevoisins.events.AddFavoriteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
@@ -33,16 +34,22 @@ public class FavoriteNeighboursFragment extends Fragment {
     private NeighbourApiService mFavApiService;
     private RecyclerView  mFavRecyclerView;
 
+    private String IS_FAVORITE = "mFavori";
+    static   boolean isFavorite;
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      * @return A new instance of fragment FavoriteNeighbourFragment.
      */
-    public static FavoriteNeighboursFragment newInstance() {
+    public static FavoriteNeighboursFragment newInstance(boolean isFavorite) {
         FavoriteNeighboursFragment fragment = new FavoriteNeighboursFragment();
+        Bundle args = new Bundle();
+        args.putBoolean("favorite", isFavorite);
+        fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,6 +93,12 @@ public class FavoriteNeighboursFragment extends Fragment {
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mFavApiService.deleteNeighbour(event.neighbour);
+        initList();
+    }
+
+    @Subscribe
+    public void onAddFavoriteNeighbour(AddFavoriteNeighbourEvent event) {
+        mFavApiService.addFavoriteNeighbour(event.neighbour);
         initList();
     }
 }

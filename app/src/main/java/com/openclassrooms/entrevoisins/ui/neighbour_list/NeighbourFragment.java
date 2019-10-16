@@ -28,12 +28,12 @@ import java.util.List;
 public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours;
+    static List<Neighbour> mNeighbours;
     private FavoriteNeighbourApiService mFavApiService;
-    private List<Neighbour> mFavNeighbours;
-    private RecyclerView mRecyclerView;
+    static List<Neighbour> mFavNeighbours;
+    static RecyclerView mRecyclerView;
     private String IS_FAVORITE = "mFavori";
-    public  boolean isFavorite;
+    static   boolean isFavorite;
 
 
     /**
@@ -48,6 +48,7 @@ public class NeighbourFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,12 +66,7 @@ public class NeighbourFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        if(isFavorite!=true){
             initList();
-        }
-        else  {
-            initFavList();
-        }
         return view;
     }
 
@@ -120,15 +116,5 @@ public class NeighbourFragment extends Fragment {
 
     }
 
-    /**
-     * Fired if the user clicks on a add Favorite button
-     *
-     * @param event
-     */
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onAddFavoriteNeighbour(AddFavoriteNeighbourEvent event) {
-            mFavApiService.addFavoriteNeighbour(event.neighbour);
-            initFavList();
-            isFavorite=true;
-    }
+
 }

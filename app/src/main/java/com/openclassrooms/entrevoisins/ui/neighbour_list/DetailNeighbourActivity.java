@@ -13,17 +13,22 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.events.AddFavoriteNeighbourEvent;
+import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.FavoriteNeighbourApiService;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DetailNeighbourActivity extends AppCompatActivity {
     private boolean isFavorite=false;
-    private FavoriteNeighbourApiService mFavApiService;
+    private NeighbourApiService mFavApiService;
+    private NeighbourApiService mApiService;
+    Neighbour neighbour;
     private List<Neighbour> mFavNeighbours;
     FloatingActionButton favoriteButton;
     ImageView backButton;
@@ -69,14 +74,23 @@ public class DetailNeighbourActivity extends AppCompatActivity {
                     isFavorite=false;
                     favoriteButton.setImageResource(R.drawable.ic_star_border_yellow_24dp);
                 }
-                Neighbour neighbour=new Neighbour (12, "Tibs", "http://i.pravatar.cc/150?u=a042581f3e39026702d");
-                EventBus.getDefault().post(new AddFavoriteNeighbourEvent(neighbour));
-
+                 neighbour=new Neighbour (Integer.valueOf(mId),mDetailName,mDetailAvatar);
+                //EventBus.getDefault().post(new AddFavoriteNeighbourEvent(neighbour));
+               // mFavApiService.addFavoriteNeighbour(neighbour);
+                addNeighbour();
                 Snackbar.make(v, getIntent().getStringExtra("id"), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
 
     }
+    private void addNeighbour()
+    {
 
+        //mApiService.addFavoriteNeighbour(neighbour);
+        //FavoriteNeighbourFragment.mFavNeighbours.add(neighbour);
+        //FavoriteNeighbourFragment.mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavNeighbours));
+        EventBus.getDefault().post(new AddFavoriteNeighbourEvent(neighbour));
+
+    }
 }
