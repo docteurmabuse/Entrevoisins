@@ -28,6 +28,5 @@ public class FavoriteNeighbourApiService implements  NeighbourApiService {
         neighbours.remove(neighbour);
     }
 
-    @Override
     public  void addFavoriteNeighbour(Neighbour neighbour){neighbours.add(neighbour);}
 }
