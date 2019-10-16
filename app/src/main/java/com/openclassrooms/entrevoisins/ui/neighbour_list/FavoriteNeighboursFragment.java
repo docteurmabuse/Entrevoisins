@@ -19,6 +19,7 @@ import com.openclassrooms.entrevoisins.di.DI;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -90,13 +91,13 @@ public class FavoriteNeighboursFragment extends Fragment {
      * Fired if the user clicks on a delete button
      * @param event
      */
-    @Subscribe
+    @Subscribe (sticky = true, threadMode = ThreadMode.MAIN)
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mFavApiService.deleteNeighbour(event.neighbour);
         initList();
     }
 
-    @Subscribe
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onAddFavoriteNeighbour(AddFavoriteNeighbourEvent event) {
         mFavApiService.addFavoriteNeighbour(event.neighbour);
         initList();

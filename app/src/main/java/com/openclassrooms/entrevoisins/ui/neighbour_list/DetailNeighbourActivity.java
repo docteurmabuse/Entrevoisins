@@ -90,7 +90,8 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         //mApiService.addFavoriteNeighbour(neighbour);
         //FavoriteNeighbourFragment.mFavNeighbours.add(neighbour);
         //FavoriteNeighbourFragment.mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavNeighbours));
-        EventBus.getDefault().post(new AddFavoriteNeighbourEvent(neighbour));
+        EventBus.getDefault().postSticky(new AddFavoriteNeighbourEvent(neighbour));
+
 
     }
 }
