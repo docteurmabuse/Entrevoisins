@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.events.AddFavoriteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteFavoriteNeighbourEvent;
-import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+import com.openclassrooms.entrevoisins.service.FavoriteNeighbourApiService;
+
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 
@@ -33,7 +33,7 @@ import java.util.List;
  */
 public class FavoriteNeighboursFragment extends Fragment {
     private List<Neighbour> mFavNeighbour;
-    private NeighbourApiService mFavApiService;
+    private FavoriteNeighbourApiService mFavApiService;
     private RecyclerView  mFavRecyclerView;
     private String IS_FAVORITE = "mFavorite";
     static   boolean isFavorite;
@@ -80,22 +80,23 @@ public class FavoriteNeighboursFragment extends Fragment {
 
     @Override
     public void onStop() {
-        super.onStop();
         EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     /**
      * Fired if the user clicks on a delete button
      * @param event
      */
-    @Subscribe (sticky = true, threadMode = ThreadMode.MAIN)
-    public void onDeleteFavoriteNeighbour(DeleteFavoriteNeighbourEvent event) {
+    @Subscribe
+    public void onDeleteFavoriteNeighbourEvent(DeleteFavoriteNeighbourEvent event) {
         mFavApiService.deleteNeighbour(event.neighbour);
         initList();
     }
 
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onAddFavoriteNeighbour(AddFavoriteNeighbourEvent event) {
+    @Subscribe
+    public void onAddFavoriteNeighbourEvent(AddFavoriteNeighbourEvent event) {
+        mFavApiService.addFavoriteNeighbour(event.neighbour);
         initList();
     }
 

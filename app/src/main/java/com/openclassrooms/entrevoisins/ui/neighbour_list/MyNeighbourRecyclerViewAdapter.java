@@ -3,6 +3,7 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,7 +75,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 final Context context = holder.itemView.getContext();
                 Intent intent = new Intent(context, DetailNeighbourActivity.class);
                 Bundle bundle = new Bundle();
-                //bundle.putSerializable("fav_neighbour",(Serializable)neighbour);
+                bundle.putParcelable("fav_neighbour",neighbour);
                 bundle.putString("id", mId);
                 bundle.putString("name", mName);
                 bundle.putString("avatar", mAvatar);

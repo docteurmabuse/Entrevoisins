@@ -5,35 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECEFF0"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".ui.neighbour_list.DetailNeighbourActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay" />
+        android:layout_height="@dimen/appbar_padding_top"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
+            <ImageView
+                android:id="@+id/ivAvatar"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
-        <include
-            layout="@layout/content_detail_neighbour"
-            android:elevation="3dp" />
-    </FrameLayout>
+    <include layout="@layout/fragment_detail_neighbour" />
 
-
-    <ImageView
-        android:id="@+id/backbutton"
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
-
-
-
+        android:layout_gravity="bottom|left"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/app_bar" />
 </android.support.design.widget.CoordinatorLayout>

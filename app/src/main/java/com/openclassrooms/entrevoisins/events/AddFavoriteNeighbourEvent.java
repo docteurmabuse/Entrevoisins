@@ -15,5 +15,8 @@ public class AddFavoriteNeighbourEvent {
     public AddFavoriteNeighbourEvent(Neighbour neighbour) {
         this.neighbour = neighbour;
     }
+    public Neighbour getMyNeighbourg(){
+        return neighbour;
+    }
 }
 
