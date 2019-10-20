@@ -34,13 +34,14 @@ import java.util.List;
 public class FavoriteNeighboursFragment extends Fragment {
     private List<Neighbour> mFavNeighbour;
     private FavoriteNeighbourApiService mFavApiService;
-    private RecyclerView  mFavRecyclerView;
+    private RecyclerView mFavRecyclerView;
     private String IS_FAVORITE = "mFavorite";
-    static   boolean isFavorite;
+    static boolean isFavorite;
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
+     *
      * @return A new instance of fragment FavoriteNeighbourFragment.
      */
     public static FavoriteNeighboursFragment newInstance() {
@@ -53,7 +54,7 @@ public class FavoriteNeighboursFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        mFavApiService= DI.getFavoriteService();
+        mFavApiService = DI.getFavoriteService();
     }
 
     @Override
@@ -68,10 +69,12 @@ public class FavoriteNeighboursFragment extends Fragment {
         initList();
         return view;
     }
+
     private void initList() {
         mFavNeighbour = mFavApiService.getNeighbours();
-        mFavRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavNeighbour,true));
+        mFavRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavNeighbour, true));
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -86,6 +89,7 @@ public class FavoriteNeighboursFragment extends Fragment {
 
     /**
      * Fired if the user clicks on a delete button
+     *
      * @param event
      */
     @Subscribe

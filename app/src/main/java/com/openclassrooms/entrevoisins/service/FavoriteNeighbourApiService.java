@@ -11,7 +11,6 @@ public class FavoriteNeighbourApiService implements  NeighbourApiService {
 
     private List<Neighbour> neighbours = FavouriteNeighbourGenerator.generateFavoriteNeighbour();
 
-
     /**
      * {@inheritDoc}
      */
@@ -21,12 +20,16 @@ public class FavoriteNeighbourApiService implements  NeighbourApiService {
     }
 
     /**
+     * Delete  a favorite neighbour
      * {@inheritDoc}
      */
     @Override
     public void deleteNeighbour(Neighbour neighbour) {
         neighbours.remove(neighbour);
     }
-
+    /**
+     * Add a favorite neighbour
+     * {@param neighbour}
+     */
     public  void addFavoriteNeighbour(Neighbour neighbour){neighbours.add(neighbour);}
 }

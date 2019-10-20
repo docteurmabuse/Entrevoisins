@@ -2,8 +2,6 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +18,7 @@ import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import org.greenrobot.eventbus.EventBus;
-;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,9 +31,9 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     public static final String DETAIL_NEIGHBOUR = "detailNeighbour";
 
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items,Boolean isfavorite) {
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, Boolean isfavorite) {
         mNeighbours = items;
-        isFavorite=isfavorite;
+        isFavorite = isfavorite;
     }
 
     @Override
@@ -57,14 +55,12 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(!isFavorite) {
-                   EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
-                   EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
-               }
-               else
-               {
-                   EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
-               }
+                if (!isFavorite) {
+                    EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
+                    EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
+                } else {
+                    EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
+                }
             }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -72,8 +68,8 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             public void onClick(View v) {
                 final Context context = holder.itemView.getContext();
                 Intent intent = new Intent(context, DetailNeighbourScrollingActivity.class);
-                Neighbour detailNeighbour= neighbour;
-                intent.putExtra(DETAIL_NEIGHBOUR,detailNeighbour);
+                Neighbour detailNeighbour = neighbour;
+                intent.putExtra(DETAIL_NEIGHBOUR, detailNeighbour);
                 context.startActivity(intent);
             }
         });

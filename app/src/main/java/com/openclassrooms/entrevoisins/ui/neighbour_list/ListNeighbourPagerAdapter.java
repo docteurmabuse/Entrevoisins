@@ -4,14 +4,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-
 public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
     int numberOfTabs;
 
     public ListNeighbourPagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
         this.numberOfTabs = NumOfTabs;
-
     }
 
     /**
