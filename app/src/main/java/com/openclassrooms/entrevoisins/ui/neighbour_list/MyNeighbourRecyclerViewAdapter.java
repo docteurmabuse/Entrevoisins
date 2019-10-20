@@ -59,6 +59,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             public void onClick(View v) {
                if(!isFavorite) {
                    EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
+                   EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
                }
                else
                {

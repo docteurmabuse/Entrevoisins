@@ -79,9 +79,9 @@ public class FavoriteNeighboursFragment extends Fragment {
     }
 
     @Override
-    public void onStop() {
+    public void onDestroy() {
+        super.onDestroy();
         EventBus.getDefault().unregister(this);
-        super.onStop();
     }
 
     /**

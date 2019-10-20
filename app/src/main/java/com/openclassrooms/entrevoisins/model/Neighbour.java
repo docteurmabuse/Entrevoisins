@@ -21,7 +21,6 @@ public class Neighbour implements Parcelable {
 
     /** Avatar */
     private String avatarUrl;
-    private  Neighbour favNeighbour;
 
     /**
      * Constructor
@@ -43,7 +42,6 @@ public class Neighbour implements Parcelable {
         }
         name = in.readString();
         avatarUrl = in.readString();
-        favNeighbour = in.readParcelable(Neighbour.class.getClassLoader());
     }
 
     @Override
@@ -56,7 +54,6 @@ public class Neighbour implements Parcelable {
         }
         dest.writeString(name);
         dest.writeString(avatarUrl);
-        dest.writeParcelable(favNeighbour, flags);
     }
 
     @Override
@@ -111,11 +108,5 @@ public class Neighbour implements Parcelable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-    /**
-     * Generate random user
-     */
-    public void  addFavoriteNeighbour(Neighbour favNeighbour){
-        FAVOURITE_NEIGHBOURS.add(favNeighbour);
     }
 }

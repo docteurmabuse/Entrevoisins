@@ -50,5 +50,6 @@ public class ListNeighbourActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tabs) {
             }
         });
+
     }
 }
