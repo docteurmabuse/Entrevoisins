@@ -20,9 +20,7 @@ import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.io.Serializable;
-import java.lang.reflect.Array;
+;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,6 +30,8 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     private final List<Neighbour> mNeighbours;
     private Boolean isFavorite;
+    public static final String DETAIL_NEIGHBOUR = "detailNeighbour";
+
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items,Boolean isfavorite) {
         mNeighbours = items;
@@ -69,17 +69,10 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mName = neighbour.getName();
-                String mAvatar = neighbour.getAvatarUrl();
-                String mId = neighbour.getId().toString();
                 final Context context = holder.itemView.getContext();
-                Intent intent = new Intent(context, DetailNeighbourActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("fav_neighbour",neighbour);
-                bundle.putString("id", mId);
-                bundle.putString("name", mName);
-                bundle.putString("avatar", mAvatar);
-                intent.putExtras(bundle);
+                Intent intent = new Intent(context, DetailNeighbourScrollingActivity.class);
+                Neighbour detailNeighbour= neighbour;
+                intent.putExtra(DETAIL_NEIGHBOUR,detailNeighbour);
                 context.startActivity(intent);
             }
         });

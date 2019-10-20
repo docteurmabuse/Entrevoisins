@@ -4,6 +4,7 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -44,59 +45,41 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_detail_neighbour);
-        final Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        AppBarLayout mAppBarLayout = findViewById(R.id.app_bar);
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = false;
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    isShow = true;
-                    showOption(R.id.action_info);
-                } else if (isShow) {
-                    isShow = false;
-                    hideOption(R.id.action_info);
-                }
-            }
-        });
-
-
+        setContentView(R.layout.fragment_detail_neighbour);
+//        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // Set Collapsing Toolbar layout to the screen
+        CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        // Set title of Detail page
+        // collapsingToolbar.setTitle(getString(R.string.item_title));
 
 
         TextView tvName = findViewById(R.id.tvName);
         Intent intent = getIntent();
         if (intent !=null){
-            neighbour=intent.getParcelableExtra("fav_neighbour");
+            neighbour=intent.getParcelableExtra("detailNeighbour");
             if(neighbour!=null){
                  mId =neighbour.getId();
                  mDetailName = neighbour.getName();
                  mDetailAvatar=neighbour.getAvatarUrl();
             }
         }
-        mFavApiService= DI.getFavoriteService();
-        mFavNeighbour=mFavApiService.getNeighbours();
-        neighbour=new Neighbour (Integer.valueOf(mId),mDetailName,mDetailAvatar);
+       // mFavApiService= DI.getFavoriteService();
+       // mFavNeighbour=mFavApiService.getNeighbours();
 
         tvName.setText(mDetailName);
         TextView tvName2 = findViewById(R.id.mName2);
         tvName2.setText(mDetailName);
 
         //add Neighbour avatar image
-        ImageView ivAvatar = findViewById(R.id.ivAvatar);
-        Glide.with(ivAvatar.getContext())
-                .load(mDetailAvatar)
-                .into(ivAvatar);
+        ImageView dvAvatar = (ImageView) findViewById(R.id.imageAvatar);
+        Glide.with(dvAvatar.getContext())
+                .load("http://i.pravatar.cc/150?u=a042581f4e29026704c")
+                .into(dvAvatar);
         //Is in favorite list?
-        isFavorite=mFavNeighbour.contains(neighbour);
+//        isFavorite=mFavNeighbour.contains(neighbour);
         //add back button
        // backButton = findViewById(R.id.backbutton);
        // backButton.setOnClickListener(new View.OnClickListener() {
@@ -132,41 +115,6 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        this.menu = menu;
-        getMenuInflater().inflate(R.menu.menu_detail_neighbour, menu);
-        hideOption(R.id.action_info);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_info) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void hideOption(int id) {
-        MenuItem item = menu.findItem(id);
-        item.setVisible(false);
-    }
-
-    private void showOption(int id) {
-        MenuItem item = menu.findItem(id);
-        item.setVisible(true);
-    }
     private void addNeighbour()
     {
             isFavorite=true;

@@ -13,8 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.neighbour_list.DetailNeighbourScrollingActivity"
+            android:label="@string/title_activity_detail_neighbour_scrolling"
+            android:parentActivityName=".ui.neighbour_list.ListNeighbourActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity" />
+        </activity>
+        <activity
             android:name=".ui.neighbour_list.DetailNeighbourActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".ui.neighbour_list.ListNeighbourActivity"></activity>
         <activity
             android:name=".ui.neighbour_list.ListNeighbourActivity"
             android:label="@string/app_name"
