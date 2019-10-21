@@ -21,12 +21,13 @@ public class FavoriteNeighbourApiService implements  NeighbourApiService {
 
     /**
      * Delete  a favorite neighbour
-     * {@inheritDoc}
+     * {@param neighbour}
      */
     @Override
     public void deleteNeighbour(Neighbour neighbour) {
         neighbours.remove(neighbour);
     }
+
     /**
      * Add a favorite neighbour
      * {@param neighbour}

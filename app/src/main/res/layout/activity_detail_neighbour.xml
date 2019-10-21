@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.neighbour_list.DetailNeighbourScrollingActivity">
+    tools:context=".ui.neighbour_list.DetailNeighbourActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -41,15 +41,18 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_detail_neighbour_scrolling" />
+    <include layout="@layout/content_detail_neighbour" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
+        android:scaleType="center"
         android:backgroundTint="#FCFCFC"
         app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:fabCustomSize="@dimen/fab_width"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end" />
 

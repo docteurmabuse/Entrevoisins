@@ -25,9 +25,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
  * Use the {@link FavoriteNeighboursFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
@@ -88,7 +85,7 @@ public class FavoriteNeighboursFragment extends Fragment {
     }
 
     /**
-     * Fired if the user clicks on a delete button
+     * Fired if the user clicks on a delete button or favorite button when star is full
      *
      * @param event
      */
@@ -98,6 +95,11 @@ public class FavoriteNeighboursFragment extends Fragment {
         initList();
     }
 
+    /**
+     * Fired if the user clicks on a favorite button when star is empty
+     *
+     * @param event
+     */
     @Subscribe
     public void onAddFavoriteNeighbourEvent(AddFavoriteNeighbourEvent event) {
         mFavApiService.addFavoriteNeighbour(event.neighbour);

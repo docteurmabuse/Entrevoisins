@@ -23,8 +23,10 @@ import static com.openclassrooms.entrevoisins.ui.neighbour_list.MyNeighbourRecyc
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
+/**
 
-public class DetailNeighbourScrollingActivity extends AppCompatActivity {
+ */
+public class DetailNeighbourActivity extends AppCompatActivity {
     private Neighbour neighbour;
     private List<Neighbour> mFavNeighbour;
     private FavoriteNeighbourApiService mFavApiService;
@@ -37,7 +39,7 @@ public class DetailNeighbourScrollingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_neighbour_scrolling);
+        setContentView(R.layout.activity_detail_neighbour);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mFavApiService = DI.getFavoriteService();
