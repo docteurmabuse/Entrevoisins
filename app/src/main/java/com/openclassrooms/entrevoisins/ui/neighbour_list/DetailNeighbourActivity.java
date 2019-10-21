@@ -52,6 +52,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
             mDetailName = neighbour.getName();
             mDetailAvatar = neighbour.getAvatarUrl();
             populateViews();
+            fabOnclickListner();
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,6 +71,9 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         TextView DetailName = (TextView) findViewById(R.id.mDetailName);
         DetailName.setText(mDetailName);
 
+    }
+
+    private void fabOnclickListner(){
         fab = (FloatingActionButton) findViewById(R.id.fab);
         if (isFavorite) {
             fab.setImageResource(R.drawable.ic_star_yellow_24dp);
@@ -90,7 +94,6 @@ public class DetailNeighbourActivity extends AppCompatActivity {
             }
         });
     }
-
     private void addFavoriteNeighbour() {
         isFavorite = true;
         EventBus.getDefault().post(new AddFavoriteNeighbourEvent(neighbour));

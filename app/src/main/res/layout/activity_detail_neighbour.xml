@@ -51,7 +51,7 @@
         android:scaleType="center"
         android:backgroundTint="#FCFCFC"
         app:borderWidth="0dp"
-        app:fabSize="mini"
+        app:fabSize="normal"
         app:fabCustomSize="@dimen/fab_width"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end" />
