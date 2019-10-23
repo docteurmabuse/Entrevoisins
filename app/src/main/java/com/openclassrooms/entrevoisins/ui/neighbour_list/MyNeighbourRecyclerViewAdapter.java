@@ -67,10 +67,8 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             @Override
             public void onClick(View v) {
                 final Context context = holder.itemView.getContext();
-                Intent intent = new Intent(context, DetailNeighbourActivity.class);
                 Neighbour detailNeighbour = neighbour;
-                intent.putExtra(DETAIL_NEIGHBOUR, detailNeighbour);
-                context.startActivity(intent);
+               launchDetailNeighbour(detailNeighbour, context);
             }
         });
 
@@ -93,5 +91,12 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             super(view);
             ButterKnife.bind(this, view);
         }
+    }
+    public void launchDetailNeighbour(Neighbour neighbour, Context  context){
+        final Context mycontext = context;
+        Intent intent = new Intent(mycontext, DetailNeighbourActivity.class);
+        Neighbour detailNeighbour = neighbour;
+        intent.putExtra(DETAIL_NEIGHBOUR, detailNeighbour);
+        context.startActivity(intent);
     }
 }
