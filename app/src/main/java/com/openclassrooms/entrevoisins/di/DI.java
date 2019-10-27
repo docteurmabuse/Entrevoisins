@@ -32,4 +32,7 @@ public class DI {
         return new DummyNeighbourApiService();
     }
 
+    public static FavoriteNeighbourApiService getNewInstanceFavoriteApiService() {
+        return new FavoriteNeighbourApiService();
+    }
 }

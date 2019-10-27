@@ -129,7 +129,6 @@ public class NeighboursListTest {
         Espresso.pressBack();
         onView(ViewMatchers.withId(R.id.tabItem2)).perform((click()));
 
-
         // Then : the favorite list activity element is
         onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVOURITE_COUNT));
 
