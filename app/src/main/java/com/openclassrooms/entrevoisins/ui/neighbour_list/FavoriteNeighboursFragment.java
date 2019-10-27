@@ -32,8 +32,6 @@ public class FavoriteNeighboursFragment extends Fragment {
     private List<Neighbour> mFavNeighbour;
     private FavoriteNeighbourApiService mFavApiService;
     private RecyclerView mFavRecyclerView;
-    private String IS_FAVORITE = "mFavorite";
-    static boolean isFavorite;
 
     /**
      * Use this factory method to create a new instance of
@@ -79,8 +77,8 @@ public class FavoriteNeighboursFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onStop() {
+        super.onStop();
         EventBus.getDefault().unregister(this);
     }
 
@@ -95,16 +93,6 @@ public class FavoriteNeighboursFragment extends Fragment {
         initList();
     }
 
-    /**
-     * Fired if the user clicks on a favorite button when star is empty
-     *
-     * @param event
-     */
-    @Subscribe
-    public void onAddFavoriteNeighbourEvent(AddFavoriteNeighbourEvent event) {
-        mFavApiService.addFavoriteNeighbour(event.neighbour);
-        initList();
-    }
 
 
 }

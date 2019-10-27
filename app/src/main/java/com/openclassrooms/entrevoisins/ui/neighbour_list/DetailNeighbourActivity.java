@@ -3,6 +3,7 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -27,80 +28,85 @@ import java.util.List;
 
  */
 public class DetailNeighbourActivity extends AppCompatActivity {
+    int mId;
+    String mDetailName;
+    String mDetailAvatar;
     private Neighbour neighbour;
     private List<Neighbour> mFavNeighbour;
     private FavoriteNeighbourApiService mFavApiService;
     private FloatingActionButton fab;
-    int mId;
-    String mDetailName;
-    String mDetailAvatar;
     private boolean isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_neighbour);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         mFavApiService = DI.getFavoriteService();
         mFavNeighbour = mFavApiService.getNeighbours();
         neighbour = getIntent().getParcelableExtra(DETAIL_NEIGHBOUR);
-        isFavorite = mFavNeighbour.contains(neighbour);
 
         if (neighbour != null) {
-            mId = neighbour.getId();
-            mDetailName = neighbour.getName();
-            mDetailAvatar = neighbour.getAvatarUrl();
+            isFavorite = mFavNeighbour.contains(neighbour);
+            getFavoriteNeighbour();
             populateViews();
             fabOnclickListner();
         }
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        // Set title of Detail page
-        collapsingToolbar.setTitle(mDetailName);
     }
 
+    public void getFavoriteNeighbour(){
+        mId = neighbour.getId();
+        mDetailName = neighbour.getName();
+        mDetailAvatar = neighbour.getAvatarUrl();
+    }
     public void populateViews() {
-        Neighbour neighbour = new Neighbour(mId, mDetailName, mDetailAvatar);
+        setContentView(R.layout.activity_detail_neighbour);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ImageView DetailAvatar = (ImageView) findViewById(R.id.mDetailAvatar);
         Glide.with(DetailAvatar.getContext())
                 .load(mDetailAvatar)
                 .into(DetailAvatar);
+
+        CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        // Set title of Detail page
+        collapsingToolbar.setTitle(mDetailName);
+
         TextView DetailName = (TextView) findViewById(R.id.mDetailName);
         DetailName.setText(mDetailName);
 
-    }
-
-    private void fabOnclickListner(){
         fab = (FloatingActionButton) findViewById(R.id.fab);
         if (isFavorite) {
             fab.setImageResource(R.drawable.ic_star_yellow_24dp);
         } else {
             fab.setImageResource(R.drawable.ic_star_border_yellow_24dp);
         }
+    }
+
+    private void fabOnclickListner(){
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (!isFavorite) {
                     fab.setImageResource(R.drawable.ic_star_yellow_24dp);
-                    addFavoriteNeighbour();
+                    addFavoriteNeighbour(view);
                 } else {
-                    fab.setImageResource(R.drawable.ic_star_border_yellow_24dp);
-                    deleteFavoriteNeighbour();
+                    alreadyFavoriteNeighbour(view);
                 }
             }
         });
     }
-    private void addFavoriteNeighbour() {
+    private void addFavoriteNeighbour(View view) {
         isFavorite = true;
-        EventBus.getDefault().post(new AddFavoriteNeighbourEvent(neighbour));
+        mFavApiService.addFavoriteNeighbour(neighbour);
+        Snackbar.make(view, "Vous venez d'ajouter "+mDetailName+" à vos voisins favoris!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 
-    private void deleteFavoriteNeighbour() {
-        isFavorite = false;
-        EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
-    }
+    private void alreadyFavoriteNeighbour(View view) {
+        Snackbar.make(view, "Ce voisin fait déjà partie de vos favoris!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();    }
 }
