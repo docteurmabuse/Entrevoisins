@@ -33,4 +33,13 @@ public class FavoriteNeighbourApiService implements  NeighbourApiService {
      * {@param neighbour}
      */
     public  void addFavoriteNeighbour(Neighbour neighbour){neighbours.add(neighbour);}
+
+    /**
+     * Check if neighbour is favorite
+     * @param neighbour
+     */
+    public Boolean favorite (Neighbour neighbour){
+        return neighbours.contains(neighbour);
+    }
+
 }

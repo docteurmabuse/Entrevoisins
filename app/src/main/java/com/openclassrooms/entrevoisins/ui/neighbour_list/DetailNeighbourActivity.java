@@ -45,7 +45,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         neighbour = getIntent().getParcelableExtra(DETAIL_NEIGHBOUR);
 
         if (neighbour != null) {
-            isFavorite = mFavNeighbour.contains(neighbour);
+            isFavorite = mFavApiService.favorite(neighbour);
             getFavoriteNeighbour();
             populateViews();
             fabOnclickListner();

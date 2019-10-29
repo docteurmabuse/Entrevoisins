@@ -41,5 +41,6 @@ public class FavoriteNeighbourApiServiceTest {
     }
     @Test
     public void deleteFavoriteNeighboursWithSuccess() {
+
     }
 }
