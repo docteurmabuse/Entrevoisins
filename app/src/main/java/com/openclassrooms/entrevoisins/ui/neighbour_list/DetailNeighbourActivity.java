@@ -14,14 +14,10 @@ import com.bumptech.glide.Glide;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.events.AddFavoriteNeighbourEvent;
-import com.openclassrooms.entrevoisins.events.DeleteFavoriteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.FavoriteNeighbourApiService;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import static com.openclassrooms.entrevoisins.ui.neighbour_list.MyNeighbourRecyclerViewAdapter.DETAIL_NEIGHBOUR;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 /**
@@ -33,19 +29,17 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     String mDetailAvatar;
     private Neighbour neighbour;
     private List<Neighbour> mFavNeighbour;
-    private FavoriteNeighbourApiService mFavApiService;
+    private NeighbourApiService mFavApiService;
     private FloatingActionButton fab;
-    private boolean isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFavApiService = DI.getFavoriteService();
+        mFavApiService = DI.getNeighbourApiService();
         mFavNeighbour = mFavApiService.getNeighbours();
         neighbour = getIntent().getParcelableExtra(DETAIL_NEIGHBOUR);
 
         if (neighbour != null) {
-            isFavorite = mFavApiService.favorite(neighbour);
             getFavoriteNeighbour();
             populateViews();
             fabOnclickListner();
@@ -77,7 +71,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         DetailName.setText(mDetailName);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        if (isFavorite) {
+        if (mFavApiService.isFavorite(neighbour)) {
             fab.setImageResource(R.drawable.ic_star_yellow_24dp);
         } else {
             fab.setImageResource(R.drawable.ic_star_border_yellow_24dp);
@@ -90,7 +84,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!isFavorite) {
+                if (!mFavApiService.isFavorite(neighbour)) {
                     fab.setImageResource(R.drawable.ic_star_yellow_24dp);
                     addFavoriteNeighbour(view);
                 } else {
@@ -100,7 +94,6 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         });
     }
     private void addFavoriteNeighbour(View view) {
-        isFavorite = true;
         mFavApiService.addFavoriteNeighbour(neighbour);
         Snackbar.make(view, "Vous venez d'ajouter "+mDetailName+" à vos voisins favoris!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();

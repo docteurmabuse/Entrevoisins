@@ -20,11 +20,11 @@ public class FavoriteNeighbourApiServiceTest {
     public void setup() {
         service = DI.getNewInstanceApiService();
         favoriteService=DI.getNewInstanceFavoriteApiService();
-
     }
 
     @Test
     public void getFavoriteNeighboursWithSuccess() {
+
     }
 
     @Test
@@ -38,6 +38,11 @@ public class FavoriteNeighbourApiServiceTest {
         assertTrue(neighbours.stream().map(Neighbour::getId).collect(Collectors.toList()).contains(favoriteNeighbour.getId()));
         assertTrue(neighbours.stream().map(Neighbour::getName).collect(Collectors.toList()).contains(favoriteNeighbour.getName()));
         assertTrue(neighbours.stream().map(Neighbour::getAvatarUrl).collect(Collectors.toList()).contains(favoriteNeighbour.getAvatarUrl()));
+    }
+
+    @Test
+    public void isFavoriteNeighboursWithSuccess() {
+
     }
     @Test
     public void deleteFavoriteNeighboursWithSuccess() {

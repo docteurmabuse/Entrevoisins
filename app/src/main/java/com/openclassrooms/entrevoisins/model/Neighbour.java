@@ -4,9 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Objects;
-import java.util.Random;
-
-import static com.openclassrooms.entrevoisins.service.FavouriteNeighbourGenerator.FAVOURITE_NEIGHBOURS;
 
 /**
  * Model object representing a Neighbour

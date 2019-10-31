@@ -10,17 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.openclassrooms.entrevoisins.events.AddFavoriteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteFavoriteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.FavoriteNeighbourApiService;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -30,7 +28,7 @@ import java.util.List;
  */
 public class FavoriteNeighboursFragment extends Fragment {
     private List<Neighbour> mFavNeighbour;
-    private FavoriteNeighbourApiService mFavApiService;
+    private NeighbourApiService mFavApiService;
     private RecyclerView mFavRecyclerView;
 
     /**
@@ -49,7 +47,7 @@ public class FavoriteNeighboursFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        mFavApiService = DI.getFavoriteService();
+        mFavApiService = DI.getNeighbourApiService();
     }
 
     @Override
@@ -66,7 +64,7 @@ public class FavoriteNeighboursFragment extends Fragment {
     }
 
     private void initList() {
-        mFavNeighbour = mFavApiService.getNeighbours();
+        mFavNeighbour = mFavApiService.getFavoriteNeighbours();
         mFavRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavNeighbour, true));
     }
 
@@ -89,7 +87,7 @@ public class FavoriteNeighboursFragment extends Fragment {
      */
     @Subscribe
     public void onDeleteFavoriteNeighbourEvent(DeleteFavoriteNeighbourEvent event) {
-        mFavApiService.deleteNeighbour(event.neighbour);
+        mFavApiService.deleteFavoriteNeighbour(event.neighbour);
         initList();
     }
 
