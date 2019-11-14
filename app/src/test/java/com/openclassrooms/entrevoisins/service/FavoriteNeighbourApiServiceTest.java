@@ -6,20 +6,25 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import static org.mockito.Mockito.*;
+
 public class FavoriteNeighbourApiServiceTest {
     private NeighbourApiService service;
-    private FavoriteNeighbourApiService favoriteService;
-
+    private List<Neighbour> favoriteNeighbours;
 
     @Before
     public void setup() {
         service = DI.getNewInstanceApiService();
-        favoriteService=DI.getNewInstanceFavoriteApiService();
+        favoriteNeighbours= service.getFavoriteNeighbours();
     }
 
     @Test
@@ -28,24 +33,29 @@ public class FavoriteNeighbourApiServiceTest {
     }
 
     @Test
-    public void addFavoriteNeighbourWithSuccess(){
-        List<Neighbour> neighbours = service.getNeighbours();
-        Neighbour favoriteNeighbourToAdd= service.getNeighbours().get(0);
-        favoriteService.addFavoriteNeighbour(favoriteNeighbourToAdd);
-        Neighbour favoriteNeighbour = favoriteService.getNeighbours().get(0);
-        assertEquals(favoriteNeighbourToAdd,favoriteNeighbour);
-        assertEquals(1,favoriteService.getNeighbours().size());
-        assertTrue(neighbours.stream().map(Neighbour::getId).collect(Collectors.toList()).contains(favoriteNeighbour.getId()));
-        assertTrue(neighbours.stream().map(Neighbour::getName).collect(Collectors.toList()).contains(favoriteNeighbour.getName()));
-        assertTrue(neighbours.stream().map(Neighbour::getAvatarUrl).collect(Collectors.toList()).contains(favoriteNeighbour.getAvatarUrl()));
-    }
+    public void addFavoriteNeighbourWithSuccess() {
+        service.getFavoriteNeighbours().clear();
+        List<Neighbour> favoriteNeighbours = service.getFavoriteNeighbours();
+        Neighbour favoriteNeighbourToAdd = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(0);
+        service.addFavoriteNeighbour(favoriteNeighbourToAdd);
+        assertTrue(service.getFavoriteNeighbours().contains(favoriteNeighbourToAdd));
+        }
 
     @Test
     public void isFavoriteNeighboursWithSuccess() {
-
+        List<Neighbour> favoriteNeighbours = service.getFavoriteNeighbours();
+        Neighbour neighbourToCompare = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(0);
+        service.getFavoriteNeighbours().clear();
+        favoriteNeighbours.add(neighbourToCompare);
+        assertTrue(service.isFavorite(neighbourToCompare));
     }
+
     @Test
     public void deleteFavoriteNeighboursWithSuccess() {
-
+        Neighbour neighbourToDelete = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(0);
+        service.getFavoriteNeighbours().clear();
+        favoriteNeighbours.add(neighbourToDelete);
+        service.deleteFavoriteNeighbour(neighbourToDelete);
+        assertFalse(service.getFavoriteNeighbours().contains(neighbourToDelete));
     }
 }

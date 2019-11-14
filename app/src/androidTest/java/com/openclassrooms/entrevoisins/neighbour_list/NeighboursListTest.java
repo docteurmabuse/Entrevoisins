@@ -14,6 +14,7 @@ import com.openclassrooms.entrevoisins.ui.neighbour_list.DetailNeighbourActivity
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,6 +22,7 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.Intents.intending;
@@ -44,7 +46,7 @@ public class NeighboursListTest {
     private static int ITEMS_COUNT = 12;
 
     // This is fixed
-    private static int FAVOURITE_COUNT = 2;
+    private static int FAVOURITE_COUNT = 1;
 
 
 
@@ -55,12 +57,21 @@ public class NeighboursListTest {
     public ActivityTestRule<ListNeighbourActivity> mActivityRule =
             new ActivityTestRule(ListNeighbourActivity.class);
 
+    @Rule
+    public ActivityTestRule<DetailNeighbourActivity> mDetailActivityRule =
+            new ActivityTestRule(DetailNeighbourActivity.class);
 
     @Before
     public void setUp() {
         mActivity = mActivityRule.getActivity();
+        mDetailActivity=mDetailActivityRule.getActivity();
         Intents.init();
         assertThat(mActivity, notNullValue());
+    }
+
+    @After
+    public void cleanUp(){
+        Intents.release();
     }
 
     /**
@@ -100,7 +111,7 @@ public class NeighboursListTest {
         intended(hasComponent(DetailNeighbourActivity.class.getName()));
     }
     /**
-     * We ensure that the name of the use in detail activity is hte same than in the recyclerview holder
+     * We ensure that the name of the use in detail activity is the same than in the recyclerview holder
      */
     @Test
     public void DetailNameText_LaunchingDetailActivity_isWorking(){
@@ -112,27 +123,20 @@ public class NeighboursListTest {
         // Then : the detail activity is shown
         onView(withId(R.id.mDetailName)).check(matches(withText("Vincent")));
     }
+
     /**
-     * We ensure that the name of the use in detail activity is hte same than in the recyclerview holder
+     * We ensure that the name of the use in detail activity is the same than in the recyclerview holder
      */
     @Test
-    public void myFavouriteNeighbourList_LaunchingDetailActivity_isEqual(){
-        // Given : We have 3 neighbour marked as favourite
+    public void myNeighbourDetail_checkIfAddingFavoriteIsWorkking(){
+        // Given : We have no favorite neighbours when starting app.
         onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(0));
         // When perform click on element at position 3
         onView(ViewMatchers.withId(R.id.list_neighbours)).perform((RecyclerViewActions.actionOnItemAtPosition(3, click())));
         onView(ViewMatchers.withId(R.id.fab)).perform(click());
         Espresso.pressBack();
-
-        onView(ViewMatchers.withId(R.id.list_neighbours)).perform((RecyclerViewActions.actionOnItemAtPosition(2, click())));
-        onView(ViewMatchers.withId(R.id.fab)).perform(click());
-        Espresso.pressBack();
-        onView(ViewMatchers.withId(R.id.tabItem2)).perform((click()));
-
-        // Then : the favorite list activity element is
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVOURITE_COUNT));
-
-
+        // Then : We should have 1 favorite neighbour in the list
+        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(1));
     }
 
 }

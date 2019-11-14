@@ -13,7 +13,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test on Neighbour service
@@ -22,14 +21,11 @@ import static org.junit.Assert.assertTrue;
 public class NeighbourServiceTest {
 
     private NeighbourApiService service;
-    private FavoriteNeighbourApiService favoriteService;
 
 
     @Before
     public void setup() {
         service = DI.getNewInstanceApiService();
-        favoriteService=DI.getNewInstanceFavoriteApiService();
-
     }
 
     @Test
