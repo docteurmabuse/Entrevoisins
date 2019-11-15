@@ -189,7 +189,7 @@ public class NeighboursListTest {
      * We ensure that we delete a favorite, the favorite is delete from favorite neighbour list but still in the neighbour list
      */
     @Test
-    public void myFavoriteNeighbourList_testTab() {
+    public void myFavoriteNeighbourList_testFavoriteTab_shouldBeEmpty() {
         // Given : We add 1 favorite neighbour and after remove the element at position 1
         onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT));
         onView(ViewMatchers.withId(R.id.tabItem2)).perform(ViewActions.click());
