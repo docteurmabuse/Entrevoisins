@@ -3,19 +3,13 @@ package com.openclassrooms.entrevoisins.service;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
+import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
-
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-
-import static org.mockito.Mockito.*;
 
 public class FavoriteNeighbourApiServiceTest {
     private NeighbourApiService service;
@@ -26,16 +20,19 @@ public class FavoriteNeighbourApiServiceTest {
         service = DI.getNewInstanceApiService();
         favoriteNeighbours= service.getFavoriteNeighbours();
     }
-
     @Test
     public void getFavoriteNeighboursWithSuccess() {
-
+        service.getFavoriteNeighbours().clear();
+        service.getFavoriteNeighbours().addAll(DummyNeighbourGenerator.DUMMY_NEIGHBOURS);
+        favoriteNeighbours = service.getFavoriteNeighbours();
+        List<Neighbour> expectedNeighbours = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
+        assertThat(favoriteNeighbours, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
     }
 
     @Test
     public void addFavoriteNeighbourWithSuccess() {
         service.getFavoriteNeighbours().clear();
-        List<Neighbour> favoriteNeighbours = service.getFavoriteNeighbours();
+        favoriteNeighbours = service.getFavoriteNeighbours();
         Neighbour favoriteNeighbourToAdd = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(0);
         service.addFavoriteNeighbour(favoriteNeighbourToAdd);
         assertTrue(service.getFavoriteNeighbours().contains(favoriteNeighbourToAdd));

@@ -4,7 +4,6 @@ package com.openclassrooms.entrevoisins.neighbour_list;
 import android.content.Intent;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.ViewInteraction;
-import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -54,7 +53,7 @@ public class NeighboursListTest {
     private static int ITEMS_COUNT = 12;
 
     // This is fixed
-    private static int FAVOURITE_COUNT = 1;
+    private static int FAVOURITE_COUNT = 2;
 
 
     private ListNeighbourActivity mActivity;
@@ -107,6 +106,36 @@ public class NeighboursListTest {
         onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT - 1));
     }
 
+
+    /**
+     * We ensure that favorite tab is working and the favorite neighbour list is empty
+     */
+    @Test
+    public void myFavoriteNeighbourList_testFavoriteTab_shouldBeEmpty() {
+        // When perform click or sweep left to favorite tab
+        ViewInteraction tabView = onView(
+                allOf(withContentDescription("Favorites"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.tabs),
+                                        0),
+                                1),
+                        isDisplayed()));
+        tabView.perform(click());
+
+        ViewInteraction viewPager = onView(
+                allOf(withId(R.id.container),
+                        childAtPosition(
+                                allOf(withId(R.id.main_content),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        viewPager.perform(swipeLeft());
+        // Then : The favorite neighbours list should empty
+        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(0));
+    }
     /**
      * We ensure that we show  detail activity when we click in recyclerview holder
      */
@@ -124,7 +153,7 @@ public class NeighboursListTest {
      * We ensure that the name of the neighbour  in detail activity is the same than in the recyclerview holder
      */
     @Test
-    public void DetailNameText_LaunchingDetailActivity_isWorking() {
+    public void DetailNameText_LaunchingDetailActivity_isEqual() {
         // Given : We show detail of the element at position 3
         onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT));
         // When perform click on element at position 3
@@ -146,7 +175,7 @@ public class NeighboursListTest {
         onView(ViewMatchers.withId(R.id.fab)).perform(click());
         Espresso.pressBack();
         // Then : We should have 1 favorite neighbour in the list
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVOURITE_COUNT));
+        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(1));
     }
 
 
@@ -170,34 +199,8 @@ public class NeighboursListTest {
      * We ensure that we delete a favorite, the favorite is delete from favorite neighbour list but still in the neighbour list
      */
     @Test
-    public void myFavoriteNeighbourList_deleteAction_shouldRemoveItem() {
-        // Given : We add 1 favorite neighbour and after remove the element at position 1
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(0));
-        onView(ViewMatchers.withId(R.id.list_neighbours)).perform((RecyclerViewActions.actionOnItemAtPosition(3, click())));
-        onView(ViewMatchers.withId(R.id.fab)).perform(click());
-        Espresso.pressBack();
-        Espresso.onView(ViewMatchers.withId(R.id.tabItem2)).perform(ViewActions.click());
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVOURITE_COUNT));
-        // When perform a click on a delete icon
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(0, new DeleteViewAction()));
-        // Then : the number of element is 11
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVOURITE_COUNT - 1));
-    }
-
-    /**
-     * We ensure that we delete a favorite, the favorite is delete from favorite neighbour list but still in the neighbour list
-     */
-    @Test
-    public void myFavoriteNeighbourList_testFavoriteTab_shouldBeEmpty() {
-        // Given : We add 1 favorite neighbour and after remove the element at position 1
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT));
-        onView(ViewMatchers.withId(R.id.tabItem2)).perform(ViewActions.click());
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(0));
-    }
-
-    @Test
     public void myFavoriteNeighboursList__deleteAction_shouldRemoveItem() {
+        // Given : We add 2 favorites neighbours & after remove the element at position 1
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.list_neighbours),
                         withParent(withId(R.id.container))));
@@ -271,6 +274,7 @@ public class NeighboursListTest {
                         isDisplayed()));
         viewPager.perform(swipeLeft());
 
+        // When perform a click on a delete icon
         ViewInteraction appCompatImageButton3 = onView(
                 allOf(withId(R.id.item_list_delete_button),
                         childAtPosition(
@@ -289,7 +293,8 @@ public class NeighboursListTest {
                                         1))),
                         isDisplayed()));
         recyclerView3.check(matches(isDisplayed()));
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(2 - 1));
 
+        // Then : the number of element is 1
+        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVOURITE_COUNT - 1));
     }
 }
