@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class FavoriteNeighbourApiServiceTest {
+public class FavoriteNeighbourServiceTest {
     private NeighbourApiService service;
     private List<Neighbour> favoriteNeighbours;
 

@@ -53,7 +53,7 @@ public class NeighboursListTest {
     private static int ITEMS_COUNT = 12;
 
     // This is fixed
-    private static int FAVOURITE_COUNT = 2;
+    private static int FAVOURITE_COUNT = 0;
 
 
     private ListNeighbourActivity mActivity;
@@ -106,7 +106,6 @@ public class NeighboursListTest {
         onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT - 1));
     }
 
-
     /**
      * We ensure that favorite tab is working and the favorite neighbour list is empty
      */
@@ -136,6 +135,8 @@ public class NeighboursListTest {
         // Then : The favorite neighbours list should empty
         onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(0));
     }
+
+
     /**
      * We ensure that we show  detail activity when we click in recyclerview holder
      */
@@ -147,6 +148,29 @@ public class NeighboursListTest {
         onView(ViewMatchers.withId(R.id.list_neighbours)).perform((RecyclerViewActions.actionOnItemAtPosition(3, click())));
         // Then : the detail activity is shown
         intended(hasComponent(DetailNeighbourActivity.class.getName()));
+    }
+
+
+    /**
+     * We ensure that avatar image is Displayed on neighbour detail fragment
+     */
+    @Test
+    public void listNeighbourActivityTest_checkIfImageAvatarIsDisplayed() {
+        ViewInteraction recyclerView = onView(
+                allOf(withId(R.id.list_neighbours),
+                        withParent(withId(R.id.container))));
+        recyclerView.perform(actionOnItemAtPosition(0, click()));
+
+        ViewInteraction imageView = onView(
+                allOf(withId(R.id.mDetailAvatar),
+                        childAtPosition(
+                                allOf(withId(R.id.toolbar_layout), withContentDescription("Caroline"),
+                                        childAtPosition(
+                                                withId(R.id.app_bar),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        imageView.check(matches(isDisplayed()));
     }
 
     /**
@@ -162,22 +186,6 @@ public class NeighboursListTest {
         // Then : the detail activity is shown
         onView(withId(R.id.mDetailName)).check(matches(withText("Vincent")));
     }
-
-    /**
-     * We ensure that the recyclerview favorite neighbour list have one item after adding a favorite
-     */
-    @Test
-    public void myNeighbourDetail_checkIfAddingFavoriteIsWorking() {
-        // Given : We have no favorite neighbours when starting app.
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(0));
-        // When perform click on element at position 3
-        onView(ViewMatchers.withId(R.id.list_neighbours)).perform((RecyclerViewActions.actionOnItemAtPosition(3, click())));
-        onView(ViewMatchers.withId(R.id.fab)).perform(click());
-        Espresso.pressBack();
-        // Then : We should have 1 favorite neighbour in the list
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(1));
-    }
-
 
     /**
      * We ensure that fab snack have favorite confirmation message on click
@@ -196,15 +204,14 @@ public class NeighboursListTest {
     }
 
     /**
-     * We ensure that we delete a favorite, the favorite is delete from favorite neighbour list but still in the neighbour list
+     * We ensure that the recyclerview favorite neighbour list have one more item after adding a favorite
      */
     @Test
-    public void myFavoriteNeighboursList__deleteAction_shouldRemoveItem() {
-        // Given : We add 2 favorites neighbours & after remove the element at position 1
+    public void myNeighboursList_AddFavoriteNeighbourIsWorking() {
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.list_neighbours),
                         withParent(withId(R.id.container))));
-        recyclerView.perform(actionOnItemAtPosition(2, click()));
+        recyclerView.perform(actionOnItemAtPosition(6, click()));
 
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab),
@@ -221,37 +228,11 @@ public class NeighboursListTest {
                         childAtPosition(
                                 allOf(withId(R.id.toolbar),
                                         childAtPosition(
-                                                allOf(withId(R.id.toolbar_layout), withContentDescription("Chloé")),
+                                                allOf(withId(R.id.toolbar_layout), withContentDescription("Laetitia")),
                                                 1)),
                                 1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-
-        ViewInteraction recyclerView2 = onView(
-                allOf(withId(R.id.list_neighbours),
-                        withParent(withId(R.id.container))));
-        recyclerView2.perform(actionOnItemAtPosition(4, click()));
-
-        ViewInteraction floatingActionButton2 = onView(
-                allOf(withId(R.id.fab),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        floatingActionButton2.perform(click());
-
-        ViewInteraction appCompatImageButton2 = onView(
-                allOf(withContentDescription("Navigate up"),
-                        childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                allOf(withId(R.id.toolbar_layout), withContentDescription("Elodie")),
-                                                1)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton2.perform(click());
 
         ViewInteraction tabView = onView(
                 allOf(withContentDescription("Favorites"),
@@ -274,8 +255,82 @@ public class NeighboursListTest {
                         isDisplayed()));
         viewPager.perform(swipeLeft());
 
-        // When perform a click on a delete icon
-        ViewInteraction appCompatImageButton3 = onView(
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.item_list_name), withText("Laetitia"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.list_favorite_neighbours),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textView.check(matches(withText("Laetitia")));
+
+        ViewInteraction imageView = onView(
+                allOf(withId(R.id.item_list_avatar),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.list_favorite_neighbours),
+                                        0),
+                                0),
+                        isDisplayed()));
+        imageView.check(matches(isDisplayed()));
+        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVOURITE_COUNT + 1));
+
+    }
+
+    /**
+     * We ensure that we delete a favorite, the favorite is delete from favorite neighbour list but still in the neighbour list
+     */
+    @Test
+    public void myNeighboursList_DeleteFavoriteNeighbourIsWorking() {
+        ViewInteraction recyclerView = onView(
+                allOf(withId(R.id.list_neighbours),
+                        withParent(withId(R.id.container))));
+        recyclerView.perform(actionOnItemAtPosition(3, click()));
+
+        ViewInteraction floatingActionButton = onView(
+                allOf(withId(R.id.fab),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        floatingActionButton.perform(click());
+
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withContentDescription("Navigate up"),
+                        childAtPosition(
+                                allOf(withId(R.id.toolbar),
+                                        childAtPosition(
+                                                allOf(withId(R.id.toolbar_layout), withContentDescription("Vincent")),
+                                                1)),
+                                1),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
+
+        ViewInteraction tabView = onView(
+                allOf(withContentDescription("Favorites"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.tabs),
+                                        0),
+                                1),
+                        isDisplayed()));
+        tabView.perform(click());
+
+        ViewInteraction viewPager = onView(
+                allOf(withId(R.id.container),
+                        childAtPosition(
+                                allOf(withId(R.id.main_content),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        viewPager.perform(swipeLeft());
+
+        ViewInteraction appCompatImageButton2 = onView(
                 allOf(withId(R.id.item_list_delete_button),
                         childAtPosition(
                                 childAtPosition(
@@ -283,18 +338,9 @@ public class NeighboursListTest {
                                         0),
                                 2),
                         isDisplayed()));
-        appCompatImageButton3.perform(click());
+        appCompatImageButton2.perform(click());
 
-        ViewInteraction recyclerView3 = onView(
-                allOf(withId(R.id.list_favorite_neighbours),
-                        withParent(allOf(withId(R.id.container),
-                                childAtPosition(
-                                        withId(R.id.main_content),
-                                        1))),
-                        isDisplayed()));
-        recyclerView3.check(matches(isDisplayed()));
+        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVOURITE_COUNT));
 
-        // Then : the number of element is 1
-        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(withItemCount(FAVOURITE_COUNT - 1));
     }
 }
