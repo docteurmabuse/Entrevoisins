@@ -2,7 +2,6 @@
 package com.openclassrooms.entrevoisins.neighbour_list;
 
 import android.content.Intent;
-import android.support.test.espresso.Espresso;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.Intents;
