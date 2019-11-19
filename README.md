@@ -16,5 +16,6 @@ lessons, many options available to users!
 ======================================
 
 1. Download the project code, preferably using git clone.
-2. Run the newly created configuration
+2. Click Build and make project
+3. Run the app
 
