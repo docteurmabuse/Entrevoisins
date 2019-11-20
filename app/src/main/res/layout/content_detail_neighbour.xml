@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,7 +14,9 @@
         android:orientation="vertical"
         android:paddingVertical="10dp">
 
-        <android.support.design.card.MaterialCardView
+        <androidx.cardview.widget.CardView
+
+
             android:id="@+id/mcv_detail_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingRight="15dp"
-                        android:src="@drawable/ic_location_on_pink_24dp" />
+                        app:srcCompat="@drawable/ic_location_on_pink_24dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -91,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingRight="15dp"
-                        android:src="@drawable/ic_local_phone_pink_24dp" />
+                        app:srcCompat="@drawable/ic_local_phone_pink_24dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -113,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingRight="15dp"
-                        android:src="@drawable/ic_language_pink_24dp" />
+                        app:srcCompat="@drawable/ic_language_pink_24dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -122,9 +124,9 @@
                         android:textSize="@dimen/neighbour_text_info" />
                 </LinearLayout>
             </LinearLayout>
-        </android.support.design.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.design.card.MaterialCardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_detail_mtext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -181,6 +183,6 @@
                     android:text="Bonjour ! Je souhaiterais faire de la marche nordique. Pas initiée, je recherche une ou plusieurs personnes susceptibles de m'accompagner! J'aime les jeux de cartes tels la belote et le tarot.."
                     android:textSize="@dimen/neighbour_text_info" />
             </LinearLayout>
-        </android.support.design.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

@@ -2,13 +2,13 @@
 package com.openclassrooms.entrevoisins.neighbour_list;
 
 import android.content.Intent;
-import android.support.test.espresso.ViewInteraction;
-import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.support.test.espresso.intent.Intents;
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.model.Neighbour;
@@ -22,20 +22,20 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.swipeLeft;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
-import static android.support.test.espresso.intent.Intents.intended;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
-import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
-import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withParent;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.swipeLeft;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
+import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.ChildAtPosition.childAtPosition;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.Matchers.allOf;
@@ -72,7 +72,7 @@ public class NeighboursListTest {
         mActivity = mActivityRule.getActivity();
         assertThat(mActivity, notNullValue());
         Intents.init();
-        fakeDetailNeighbour = new Neighbour(3, "Chloé", "http://i.pravatar.cc/150?u=a042581f4e29026704f");
+        fakeDetailNeighbour = new Neighbour(3, "Chloé", "http://i.pravatar.cc/150?u=a042581f4e29026704f", false);
     }
 
     @After
@@ -198,7 +198,7 @@ public class NeighboursListTest {
         // When perform click on fab to add favorite neighbour
         onView(withId(R.id.fab)).perform(click());
         // Then : We should have confirmation message on the snack
-        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText("Vous venez d'ajouter Chloé à vos voisins favoris!")))
+        onView(allOf(withId(com.google.android.material.R.id.snackbar_text), withText("Vous venez d'ajouter Chloé à vos voisins favoris!")))
                 .check(matches(isDisplayed()));
     }
 
