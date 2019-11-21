@@ -92,7 +92,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
                     fab.setImageResource(R.drawable.ic_star_yellow_24dp);
                     addFavoriteNeighbour(view);
                 } else {
-                    alreadyFavoriteNeighbour(view);
+                    deleteFavoriteNeighbour(view);
                 }
             }
         });
@@ -105,13 +105,12 @@ public class DetailNeighbourActivity extends AppCompatActivity {
                 .setAction("Action", null).show();
     }
 
-    private void alreadyFavoriteNeighbour(View view) {
+    private void deleteFavoriteNeighbour(View view) {
         fab.setImageResource(R.drawable.ic_star_border_yellow_24dp);
         Snackbar.make(view, "Ce voisin a été supprimé de vos favoris!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
         isFavorite=false;
-
-        mFavApiService.deleteNeighbour(neighbour);
+        mFavApiService.deleteFavoriteNeighbour(neighbour);
     }
 
 }
