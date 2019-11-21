@@ -34,11 +34,6 @@ public interface NeighbourApiService {
      */
       void addFavoriteNeighbour(Neighbour neighbour);
 
-    /**
-     * Check if neighbour is favorite
-     * @param neighbour
-     */
-     Boolean isFavorite (Neighbour neighbour);
 
     /**
      * Deletes a neighbour

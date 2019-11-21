@@ -28,6 +28,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     int mId;
     String mDetailName;
     String mDetailAvatar;
+    Boolean  isFavorite;
     private Neighbour neighbour;
     private List<Neighbour> mFavNeighbour;
     private NeighbourApiService mFavApiService;
@@ -51,6 +52,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         mId = neighbour.getId();
         mDetailName = neighbour.getName();
         mDetailAvatar = neighbour.getAvatarUrl();
+        isFavorite = neighbour.isFavorite();
     }
 
     public void populateViews() {
@@ -73,7 +75,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         DetailName.setText(mDetailName);
 
         fab = findViewById(R.id.fab);
-        if (mFavApiService.isFavorite(neighbour)) {
+        if (isFavorite) {
             fab.setImageResource(R.drawable.ic_star_yellow_24dp);
         } else {
             fab.setImageResource(R.drawable.ic_star_border_yellow_24dp);
@@ -86,11 +88,10 @@ public class DetailNeighbourActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!mFavApiService.isFavorite(neighbour)) {
+                if (!isFavorite) {
                     fab.setImageResource(R.drawable.ic_star_yellow_24dp);
                     addFavoriteNeighbour(view);
                 } else {
-                    fab.setImageResource(R.drawable.ic_star_border_yellow_24dp);
                     alreadyFavoriteNeighbour(view);
                 }
             }
@@ -99,13 +100,17 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
     private void addFavoriteNeighbour(View view) {
         mFavApiService.addFavoriteNeighbour(neighbour);
-        Snackbar.make(view, "Vous venez d'ajouter " + mDetailName + " à vos voisins favoris!", Snackbar.LENGTH_LONG)
+        isFavorite=true;
+        Snackbar.make(view, "Vous venez d'ajouter " + mDetailName +" à vos voisins favoris!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
 
     private void alreadyFavoriteNeighbour(View view) {
+        fab.setImageResource(R.drawable.ic_star_border_yellow_24dp);
         Snackbar.make(view, "Ce voisin a été supprimé de vos favoris!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+        isFavorite=false;
+
         mFavApiService.deleteNeighbour(neighbour);
     }
 

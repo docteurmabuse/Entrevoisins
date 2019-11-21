@@ -3,12 +3,13 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
-public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
+public class ListNeighbourPagerAdapter extends FragmentStatePagerAdapter {
     int numberOfTabs;
 
     public ListNeighbourPagerAdapter(FragmentManager fm, int NumOfTabs) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.numberOfTabs = NumOfTabs;
     }
 
