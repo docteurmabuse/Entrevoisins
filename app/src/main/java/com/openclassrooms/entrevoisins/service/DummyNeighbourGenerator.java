@@ -9,8 +9,8 @@ import java.util.List;
 public abstract class DummyNeighbourGenerator {
 
     public static List<Neighbour> DUMMY_NEIGHBOURS = Arrays.asList(
-            new Neighbour(1, "Caroline", "https://api.adorable.io/AVATARS/512/16.png", false),
-            new Neighbour(2, "Jack", "https://api.adorable.io/AVATARS/512/13.png", false),
+            new Neighbour(1, "Caroline", "http://i.pravatar.cc/150?u=a042581f4e29026704d", false),
+            new Neighbour(2, "Jack", "http://i.pravatar.cc/150?u=a042581f4e29026704e", false),
             new Neighbour(3, "Chloé", "http://i.pravatar.cc/150?u=a042581f4e29026704f", false),
             new Neighbour(4, "Vincent", "http://i.pravatar.cc/150?u=a042581f4e29026704a", false),
             new Neighbour(5, "Elodie", "http://i.pravatar.cc/150?u=a042581f4e29026704b", false),
