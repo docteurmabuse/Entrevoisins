@@ -23,13 +23,8 @@ public abstract class DummyNeighbourGenerator {
             new Neighbour(12, "Ludovic", "http://i.pravatar.cc/150?u=a042581f3e39026702d", false)
     );
 
-    public static List<Neighbour> FAVOURITE_NEIGHBOURS = new ArrayList<Neighbour>();
-
     static List<Neighbour> generateNeighbours() {
         return new ArrayList<>(DUMMY_NEIGHBOURS);
     }
 
-    static List<Neighbour> generateFavoriteNeighbour() {
-        return new ArrayList<>(FAVOURITE_NEIGHBOURS);
-    }
 }
