@@ -77,8 +77,12 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab);
         if (isFavorite) {
             fab.setImageResource(R.drawable.ic_star_yellow_24dp);
+            fab.hide();
+            fab.show();
         } else {
             fab.setImageResource(R.drawable.ic_star_border_yellow_24dp);
+            fab.hide();
+            fab.show();
         }
     }
 
@@ -90,6 +94,8 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
                 if (!isFavorite) {
                     fab.setImageResource(R.drawable.ic_star_yellow_24dp);
+                    fab.hide();
+                    fab.show();
                     addFavoriteNeighbour(view);
                 } else {
                     deleteFavoriteNeighbour(view);
@@ -107,6 +113,8 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
     private void deleteFavoriteNeighbour(View view) {
         fab.setImageResource(R.drawable.ic_star_border_yellow_24dp);
+        fab.hide();
+        fab.show();
         Snackbar.make(view, "Ce voisin a été supprimé de vos favoris!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
         isFavorite=false;
