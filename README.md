@@ -11,7 +11,11 @@ lessons, many options available to users!
 
 
 ![entre-voisins-850.jpg](entre-voisins-850.jpg)
-
+![entrevoisins_git1.png](entrevoisins_git1.png)  
+![entrevoisins_git2.png](entrevoisins_git2.png)  
+![entrevoisins_git3.png](entrevoisins_git3.png)  
+![entrevoisins_git4.png](entrevoisins_git4.png)  
+![entrevoisins_git5.png](entrevoisins_git5.png)
 ## Setup the project in Android studio
 ======================================
 
