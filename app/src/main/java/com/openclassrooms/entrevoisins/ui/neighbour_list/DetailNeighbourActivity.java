@@ -28,9 +28,8 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     int mId;
     String mDetailName;
     String mDetailAvatar;
-    Boolean  isFavorite;
+    Boolean isFavorite;
     private Neighbour neighbour;
-    private List<Neighbour> mFavNeighbour;
     private NeighbourApiService mFavApiService;
     private FloatingActionButton fab;
 
@@ -38,7 +37,6 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFavApiService = DI.getNeighbourApiService();
-        mFavNeighbour = mFavApiService.getNeighbours();
         neighbour = getIntent().getParcelableExtra(DETAIL_NEIGHBOUR);
 
         if (neighbour != null) {
@@ -106,8 +104,8 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
     private void addFavoriteNeighbour(View view) {
         mFavApiService.addFavoriteNeighbour(neighbour);
-        isFavorite=true;
-        Snackbar.make(view, "Vous venez d'ajouter " + mDetailName +" à vos voisins favoris!", Snackbar.LENGTH_LONG)
+        isFavorite = true;
+        Snackbar.make(view, "Vous venez d'ajouter " + mDetailName + " à vos voisins favoris!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
 
@@ -117,7 +115,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         fab.show();
         Snackbar.make(view, "Ce voisin a été supprimé de vos favoris!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-        isFavorite=false;
+        isFavorite = false;
         mFavApiService.deleteFavoriteNeighbour(neighbour);
     }
 
