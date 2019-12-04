@@ -14,13 +14,20 @@ Entrevoisins est une application qui  permet à des personnes d’un même quart
 
 ### 1. Téléchargez le code du projet, de préférence avec git clone
 ![clone-git.jpg](clone-git.jpg)
-### 2. Ouvrer Android Studio et cliquer sur "Check our project from Version Control" et cliquer sur Git
-![android-git.jpg](android-git.jpg)
-2. Click Build and make project
-3. Run the app
 
+### 2. Ouvrer Android Studio et cliquer sur "Check out project from Version Control" et cliquer sur Git
+### 3. Coller l'url du dépôt git dans le champ "URL"
+### 4. Modifier le dossier d'installation du dépôt si besoin dans le champ "Directory"
+
+![android-git.jpg](android-git.jpg)
+
+### 5. Synchroniser le projet avec Gradle si besoin en cliquant sur l'icône éléphant
+### 6. Compiler le projet en cliquant sur l'icône marteau
+### 7. Séléctionner un appareil android si besoin et lancer le projet en cliquant sur l'icône flêche verte
+
+![android_work.jpg](android_work.jpg)
+
+### 8. AProfiter du projet et n'hésiter pas à contribuer ou à faire part d'un bug sur le dépot Github du projet
 ![entre-voisins-850.jpg](entre-voisins-850.jpg)
-![entrevoisins_git1.png](entrevoisins_git1.png)  
-![entrevoisins_git2.png](entrevoisins_git2.png)  
-![entrevoisins_git3.png](entrevoisins_git3.png)  
-![entrevoisins_git4.png](entrevoisins_git4.png)
+
+![entre-voisins-detail-850.jpg](entre-voisins-detail-850.jpg)
