@@ -27,7 +27,7 @@ Entrevoisins est une application qui  permet à des personnes d’un même quart
 
 ![android_work.jpg](android_work.jpg)
 
-### 8. Profiter du projet et n'hésiter pas à contribuer ou à faire part d'un bug sur le dépot Github du projet.
+### 8. Profiter du projet et n'hésiter pas à contribuer ou à faire part d'un bug sur le dépôt Github du projet.
 ![entre-voisins-850.jpg](entre-voisins-850.jpg)
 
 ![entre-voisins-detail-850.jpg](entre-voisins-detail-850.jpg)
